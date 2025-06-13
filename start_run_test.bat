@@ -1,19 +1,22 @@
 @echo off
-REM Сначала переходим в папку проекта (где находится pytest.ini)
-cd /d "%~dp0"
 
-REM Создаем папку logs, если ее нет (относительно текущей папки)
-if not exist logs mkdir logs
+rem Create a virtual environment named "venv".
+python -m venv venv
 
-REM Запускаем тесты pytest с указанием конфигурационного файла и записью логов
-pytest -v --color=yes --log-file=logs/test_results.log --log-level=INFO
+rem Activate the virtual environment (Windows).  Adjust as needed for your shell.
+call venv\Scripts\activate.bat
 
-REM Если нужно остановить выполнение при ошибке (один из тестов не прошел)
-if %errorlevel% neq 0 (
-  echo Один или несколько тестов не прошли!
-  pause
-  exit /b %errorlevel%
-)
+rem Install the project's dependencies from the "requirements.txt" file.
+pip install -r requirements.txt
 
-echo Все тесты прошли успешно!
+rem Run pytest to execute the tests and generate an HTML report.
+rem Replace "path/filename.html" with the desired path and filename for the report.
+pytest --html=path/filename.html
+
+rem Deactivate the virtual environment.
+deactivate
+
+echo.
+echo Tests complete.  Check the HTML report at: path/filename.html (or your specified path)
+echo.
 pause

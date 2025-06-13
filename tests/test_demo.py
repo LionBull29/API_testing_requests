@@ -1,7 +1,7 @@
-import json
 import requests
 import logging
 import pytest
+
 
 
 class TestPytestDemo:
@@ -15,7 +15,7 @@ class TestPytestDemo:
     def headers(self):
         return {"Content-Type": "application/json"}
 
-    def test_get_demo(self, base_url):
+    def test_get_request_demo(self, base_url):
         """
         Тестовая функция для проверки GET-запроса к API.
         """
@@ -37,7 +37,7 @@ class TestPytestDemo:
             logging.error(f"Запрос не удался: {e}")  # Записываем сообщение об ошибке в лог
             raise  # Повторно выбрасываем исключение, чтобы тест не прошел
 
-    def test_get_demo1(self, base_url):
+    def test_get_request_multiple_filters_demo(self, base_url):
         """
         Тестовая функция для проверки GET-запроса к API с указание тела запроса .
         """
@@ -58,7 +58,7 @@ class TestPytestDemo:
             logging.error(f"Запрос не удался: {e}")  # Записываем сообщение об ошибке в лог
             raise  # Повторно выбрасываем исключение, чтобы тест не прошел
 
-    def test_get_demo3(self, base_url):
+    def test_get_request_filters_demo(self, base_url):
 
         try:
             response = requests.get(f"{base_url}/objects/7",
@@ -79,7 +79,7 @@ class TestPytestDemo:
 
 
 
-    def test_get_demo4(self, base_url, headers):
+    def test_post_request_demo(self, base_url, headers):
         """
         Тестовая функция для проверки POST-запроса к API.
         """
@@ -112,7 +112,7 @@ class TestPytestDemo:
             raise  # Повторно выбрасываем исключение, чтобы тест не прошел
 
 
-    def test_get_demo5(self, base_url, headers):
+    def test_put_request_demo(self, base_url, headers):
         """Тест для обновления объекта (PUT)"""
         try:
             requests_data = {
@@ -138,7 +138,7 @@ class TestPytestDemo:
             raise  # Повторно выбрасываем исключение, чтобы тест не прошел
 
 
-    def test_get_demo6(self, base_url, headers):
+    def test_patch_request_demo(self, base_url, headers):
         """Тест для частичного обновления объекта (PATCH)"""
         requests_data = {
             "name": "Apple MacBook Pro 16 (Updated via PATCH)"
